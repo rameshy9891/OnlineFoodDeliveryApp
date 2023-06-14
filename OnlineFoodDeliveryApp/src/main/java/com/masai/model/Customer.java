@@ -22,46 +22,44 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customerId;
-	
-	@NotNull(message = "name should be not notnull")
-	@NotBlank(message = "name should be not not blank")
-	@NotEmpty(message = "name should be not not empty")
-	@Size(min=2 ,max=25 ,message = "name should be not null or not blank")
-	private String firstName;
-	
-	@NotNull(message = "lastname should be not notnull")
-	@NotBlank(message = "lastname should be not not blank")
-	@NotEmpty(message = "lastname should be not not empty")
-	@Size(min=2 ,max=25 ,message = "lastname should be not null or not blank")
-	private String lastName;
-	
-	@NotNull(message = "age should be not notnull")
-	@Size(min=18, max=100,message = "childe is not allowed")
-	private Integer age;
-	
-	@NotNull(message = "gender should be not notnull")
-	private Gender gender;
-	
-	@NotNull(message = "mobile number should be not notnull")
-	@Size(min=10,max=13,message = "number +91 accepteble")
-	private String mobileNumber;
-	
-	@Embedded
-	private Address address;
-	
-	@Email(message = "email should be in proper formet")
-	private String email;
-	
-	//optional
-	
-	@OneToOne(mappedBy = "customer",fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	private FoodCart foodCart;
-	
-	private String role;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer customerId;
+
+    @NotNull(message = "First name should not be null")
+    @NotBlank(message = "First name should not be blank")
+    @NotEmpty(message = "First name should not be empty")
+    @Size(min = 2, max = 25, message = "First name should be between 2 and 25 characters")
+    private String firstName;
+
+    @NotNull(message = "Last name should not be null")
+    @NotBlank(message = "Last name should not be blank")
+    @NotEmpty(message = "Last name should not be empty")
+    @Size(min = 2, max = 25, message = "Last name should be between 2 and 25 characters")
+    private String lastName;
+
+    @NotNull(message = "Age should not be null")
+    @Size(min = 18, max = 100, message = "Age should be between 18 and 100")
+    private Integer age;
+
+    @NotNull(message = "Gender should not be null")
+    private Gender gender;
+
+    @NotNull(message = "Mobile number should not be null")
+    @Size(min = 10, max = 13, message = "Mobile number should be between 10 and 13 characters")
+    private String mobileNumber;
+
+    @Embedded
+    private Address address;
+
+    @Email(message = "Email should be in proper format")
+    private String email;
+
+
+    @OneToOne(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private FoodCart foodCart;
+
+    @NotNull(message = "you must be Assign Role")
+    private String role;
 }
