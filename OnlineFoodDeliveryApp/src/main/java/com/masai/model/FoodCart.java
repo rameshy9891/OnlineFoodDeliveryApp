@@ -1,5 +1,6 @@
 package com.masai.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.repository.query.parser.Part.IgnoreCaseType;
@@ -32,10 +33,10 @@ public class FoodCart {
 	private Customer customer;
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private List<Item> itemList;
+	private List<Item> itemList= new ArrayList<>();
 	
-	@OneToOne( mappedBy = "cart",cascade = CascadeType.ALL)
-	@JoinColumn(name = "orderDetailId")
-	private OrderDetails orderDetails;
+	@OneToMany( mappedBy = "cart",cascade = CascadeType.ALL)
+	
+	private List<OrderDetails> orderList= new ArrayList<>() ;
 
 }
