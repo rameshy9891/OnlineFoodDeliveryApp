@@ -26,7 +26,7 @@ public class FoodCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String cartId;
+    private Integer cartId;
 
     @NotNull(message = "Customer is required")
     @OneToOne(cascade = CascadeType.ALL)

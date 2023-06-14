@@ -1,6 +1,10 @@
 package com.masai.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.masai.model.Gender;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -52,9 +56,13 @@ public class Customer {
 
     @Embedded
     private Address address;
-
+    
+    @Column(unique= true)
     @Email(message = "Email should be in proper format")
     private String email;
+    
+    @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+    private String password;
 
 
     @OneToOne(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

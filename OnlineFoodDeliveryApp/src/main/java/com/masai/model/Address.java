@@ -18,11 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class Address {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer addressId;
-
+   
     @NotBlank(message = "Building name is required")
     @NotNull(message = "Building name is required")
     private String buildingName;

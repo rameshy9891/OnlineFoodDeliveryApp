@@ -22,7 +22,7 @@ public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String billId;
+    private Integer billId;
 
     @NotNull(message = "Bill date is required")
     private LocalDateTime billDate;

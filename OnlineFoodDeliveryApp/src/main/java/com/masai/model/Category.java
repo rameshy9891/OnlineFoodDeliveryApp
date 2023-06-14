@@ -24,7 +24,7 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String catId;
+	private Integer cartId;
 	
 	@NotBlank(message = "Category name is required")
 	@NotNull(message ="Category Name cannot be blank")
