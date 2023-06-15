@@ -33,11 +33,11 @@ public class FoodCart {
     @JoinColumn(name = "customerId")
     private Customer customer;
 
-    @NotEmpty(message = "Item list cannot be empty")
+    
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Item> itemList = new ArrayList<>();
 
-    @NotEmpty(message = "Order list cannot be empty")
+    
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<OrderDetails> orderList = new ArrayList<>();
 

@@ -1,7 +1,6 @@
 package com.masai.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.masai.model.Gender;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,18 +12,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
 public class Customer {
 
     @Id
@@ -44,7 +50,8 @@ public class Customer {
     private String lastName;
 
     @NotNull(message = "Age should not be null")
-    @Size(min = 18, max = 100, message = "Age should be between 18 and 100")
+    @Min(value = 18, message = "Age must be a positive number")
+    @Max(value = 100, message = "Age cannot exceed 100")
     private Integer age;
 
     @NotNull(message = "Gender should not be null")
@@ -62,12 +69,14 @@ public class Customer {
     private String email;
     
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
+    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$",
+    message = "Password must contain at least one letter, one digit, and have a length between 6 and 10 characters")
     private String password;
 
 
     @OneToOne(mappedBy = "customer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private FoodCart foodCart;
 
-    @NotNull(message = "you must be Assign Role")
+    @NotNull(message = "Role Must be Assigned")
     private String role;
 }

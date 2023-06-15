@@ -1,12 +1,13 @@
 package com.masai.exception;
 
-public class FoodCartException extends RuntimeException {
+public class FoodCartException extends RuntimeException{
 	
 	public FoodCartException() {
-		super();
+		
 	}
 	
-	public FoodCartException(String msg) {
-		super(msg);
+	public FoodCartException(String message) {
+		super(message);
 	}
+
 }
