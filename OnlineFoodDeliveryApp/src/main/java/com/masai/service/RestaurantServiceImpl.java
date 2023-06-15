@@ -44,9 +44,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 		}
 	
 		
-		Restaurant updatedrestaurant= restaurantRepository.save(restaurant);
+		return restaurantRepository.save(restaurant);
 		
-		return updatedrestaurant;
+	
 	}
 
 	@Override
