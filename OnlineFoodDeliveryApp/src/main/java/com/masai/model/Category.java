@@ -24,7 +24,7 @@ public class Category {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cartId;
+	private Integer catId;
 	
 	@NotBlank(message = "Category name is required")
 	@NotNull(message ="Category Name cannot be blank")
@@ -32,5 +32,6 @@ public class Category {
 	
 	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Item> items;
+
 
 }
