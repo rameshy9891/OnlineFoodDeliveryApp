@@ -5,7 +5,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.masai.model.Restaurant;
 
-public interface RestaurantrRepository extends JpaRepository<Restaurant, String>,PagingAndSortingRepository<Restaurant, String> {
+public interface RestaurantrRepository extends JpaRepository<Restaurant, Integer>,PagingAndSortingRepository<Restaurant, Integer> {
 	
 	
 
