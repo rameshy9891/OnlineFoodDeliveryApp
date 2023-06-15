@@ -6,13 +6,14 @@ import com.masai.model.Item;
 
 public interface ICartService {
 	
-	public FoodCart addItemToCart(FoodCart cart, Item item);
+	public FoodCart addItemToCart(Integer cartId, Item item);
 	
-	public FoodCart increaseQuantity(FoodCart cart, Item item, int quantity);
+	public FoodCart increaseQuantity(Integer cartId, Integer itemId, Integer quantity);
 	
-	public FoodCart reduceQuantity(FoodCart cart, Item item, int quantity);
+	public FoodCart reduceQuantity(Integer cartId, Integer itemId, Integer quantity);
 	
-	public FoodCart removeItem(FoodCart cart, Item item);
+	public FoodCart removeItem(Integer cartId, Integer itemId);
 	
-	public FoodCart clearCart(FoodCart cart);
+	public FoodCart clearCart(Integer cartId);
+	
 }

@@ -1,14 +1,19 @@
 package com.masai.service;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.masai.model.Customer;
 import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
+import com.masai.repository.OrderRepository;
 
 @Service
 public class IOrderServiceImpl implements IOrderService {
-
+	
+	@Autowired
+	private OrderRepository orderRepository;
+	
 	@Override
 	public OrderDetails addOrder(OrderDetails order) {
 		// TODO Auto-generated method stub
