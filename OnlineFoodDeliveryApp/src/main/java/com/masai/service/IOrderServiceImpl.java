@@ -3,9 +3,13 @@ package com.masai.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.masai.exception.OrderException;
 import com.masai.model.Customer;
+import com.masai.model.FoodCart;
 import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
+import com.masai.repository.FoodCartRepository;
 import com.masai.repository.OrderRepository;
 
 @Service
@@ -14,40 +18,87 @@ public class IOrderServiceImpl implements IOrderService {
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	 @Autowired
+	 private FoodCartRepository foodCartRepository;
+	
 	@Override
 	public OrderDetails addOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		OrderDetails savedOrder; 
+		
+		if(order != null) {
+			
+			FoodCart cart = order.getCart();
+			
+	        cart.getOrderList().add(order); // Add order to the food cart
+	        order.setCart(cart); // Set the food cart in the order
+	        
+			savedOrder = orderRepository.save(order);
+			
+		}else {
+			throw new OrderException("Order can not be null");
+		}
+		
+		return savedOrder;
 	}
 
 	@Override
 	public OrderDetails updateOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		OrderDetails updatedOrder; 
+		
+		if(order != null) {
+			
+			FoodCart cart = order.getCart();
+			
+	        cart.getOrderList().add(order); // Add order to the food cart
+	        order.setCart(cart); // Set the food cart in the order
+	        
+	        updatedOrder = orderRepository.save(order);
+			
+		}else {
+			throw new OrderException("Order can not be null");
+		}
+		
+		return updatedOrder;
 	}
 
 	@Override
 	public OrderDetails removeOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		FoodCart cart = order.getCart();
+        
+		cart.getOrderList().remove(order); // Remove order from the food cart
+        
+		order.setCart(null); // Set the food cart as null in the order
+        
+        foodCartRepository.save(cart); // Update the food cart
+        
+        orderRepository.delete(order);
+        
+        return order;
 	}
 
 	@Override
-	public OrderDetails viewOrder(OrderDetails order) {
-		// TODO Auto-generated method stub
-		return null;
+	public OrderDetails viewOrder(Integer orderId) {
+		
+		OrderDetails order = orderRepository.findById(orderId)
+				.orElseThrow( ()-> new OrderException("Invalid Order Id"));
+		
+		return order;
 	}
 
 	@Override
-	public List<OrderDetails> viewAllOrders(Restaurant res) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrderDetails> viewAllOrdersByRestaurant(Restaurant res) {
+		
+		return orderRepository.findAllByCart_Restaurant(res);
+		
 	}
 
 	@Override
-	public List<OrderDetails> viewAllOrders(Customer customer) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<OrderDetails> viewAllOrdersByCustomer(Customer customer) {
+		
+		return orderRepository.findAllByCart_Customer(customer);
 	}
 
 }
