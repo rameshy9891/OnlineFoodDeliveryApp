@@ -12,7 +12,7 @@ import com.masai.model.Item;
 import com.masai.repository.FoodCartRepository;
 
 @Service
-public class ICartServiceImpl implements ICartService {
+public class CartServiceImpl implements CartService {
 	
 	@Autowired
 	private FoodCartRepository foodCartRepository;

@@ -13,10 +13,10 @@ import com.masai.model.Restaurant;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderDetails, Integer> {
 	
-	@Query("SELECT o FROM OrderDetails o JOIN o.cart c JOIN c.items i WHERE i.restaurant = :restaurant")
-    List<OrderDetails> findAllByCart_Restaurant(Restaurant restaurant);
-
-    @Query("SELECT o FROM OrderDetails o WHERE o.cart.customer = :customer")
-    List<OrderDetails> findAllByCart_Customer(Customer customer);
+//	@Query("SELECT o FROM OrderDetails o JOIN o.cart c JOIN c.items i WHERE i.restaurant = :restaurant")
+//    List<OrderDetails> findAllByCart_Restaurant(Restaurant restaurant);
+//
+//    @Query("SELECT o FROM OrderDetails o WHERE o.cart.customer = :customer")
+//    List<OrderDetails> findAllByCart_Customer(Customer customer);
     
 }

@@ -8,7 +8,7 @@ public interface CategoryService {
  
 	public Category addCategory(Category cat);
 	public Category updateCategory(Category cat); 
-	public Category removeCategory(String catId);
+	public Category removeCategory(Integer catId);
 	public Category viewCategory(String catName);
 	public List<Category> viewAllCategory();
 }

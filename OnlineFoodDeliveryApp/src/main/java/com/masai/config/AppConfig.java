@@ -20,7 +20,10 @@ public class AppConfig {
 	
 		http.authorizeHttpRequests(auth->{
 			auth.requestMatchers(HttpMethod.POST, "/customers").permitAll()
-			//.requestMatchers(HttpMethod.POST,"/restaurant","/deliveryPartner","/order/**").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.POST,"/categories").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.PUT,"/customers/**,/categories").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.DELETE,"/customer/**,/categories/**").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.GET,"/customers/**,/customers,/categories/**,/categories").hasAnyRole("ADMIN","USER")
 			//.requestMatchers(HttpMethod.PATCH,"/order/**").hasRole("ADMIN")
 			//.requestMatchers(HttpMethod.GET,"/customers","/customer/**").hasAnyRole("ADMIN","USER")
 			.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()

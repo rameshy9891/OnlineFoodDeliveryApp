@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.masai.exception.CustomerException;
 import com.masai.model.Customer;
 import com.masai.model.CustomerDTO;
+import com.masai.model.FoodCart;
 import com.masai.repository.CustomerRepository;
 
 @Service
@@ -28,7 +29,11 @@ public class CustomerServiceImpl implements CustomerService{
 		if(customer == null) throw new CustomerException("Customer is null") ; 
     	Optional<Customer> cus = customerRepository.findByEmail(customer.getEmail()) ;
     	if(cus.isPresent()) throw new CustomerException("already present in database") ;
-    	
+    	   
+    	FoodCart foodCart = new FoodCart();
+    	  
+    	 foodCart.setCustomer(customer);
+    	  
     		return customerRepository.save(customer) ;
 	}
 

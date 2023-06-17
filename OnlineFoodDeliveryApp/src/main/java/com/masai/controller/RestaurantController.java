@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Restaurant;
-import com.masai.service.RestaurantServiceImpl;
+import com.masai.service.RestaurantService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 public class RestaurantController {
 	
 	@Autowired
-	RestaurantServiceImpl restaurantService;
+	private RestaurantService restaurantService;
 	
 	@PostMapping("/Restaurant")
 	public ResponseEntity<Restaurant> AddRestaurantHandler(@RequestBody @Valid Restaurant rest) {

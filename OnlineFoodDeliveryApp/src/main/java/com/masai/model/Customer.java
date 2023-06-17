@@ -21,16 +21,12 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class Customer {
 
     @Id
@@ -69,8 +65,8 @@ public class Customer {
     private String email;
     
     @JsonProperty(access= JsonProperty.Access.WRITE_ONLY)
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$",
-    message = "Password must contain at least one letter, one digit, and have a length between 6 and 10 characters")
+    //@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,10}$",
+    //message = "Password must contain at least one letter, one digit, and have a length between 6 and 10 characters")
     private String password;
 
 

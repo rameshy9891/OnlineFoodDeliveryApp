@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.masai.exception.CategoryException;
 import com.masai.exception.ItemException;
@@ -12,6 +13,7 @@ import com.masai.model.Item;
 import com.masai.repository.CategoryRepository;
 import com.masai.repository.ItemRepository;
 
+@Service
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired
@@ -57,7 +59,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item viewItem(String name) {
 		if(name == null) throw new ItemException("Item is null") ; 
-		Optional<Item> itemOpt = itemRepository.findItemByName(name);
+		Optional<Item> itemOpt = itemRepository.findByItemName(name);
 		
 		if(itemOpt.isEmpty()) throw new ItemException("There is no Item avaliable in the database with name"
 		  		+ " "+name);
@@ -70,7 +72,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Item removeItem(String name) {
 		if(name == null) throw new ItemException("name is null") ; 
-		Optional<Item> itemOpt = itemRepository.findItemByName(name);
+		Optional<Item> itemOpt = itemRepository.findByItemName(name);
 		
 		if(itemOpt.isEmpty()) throw new ItemException("There is no Item avaliable in the database with name"
 		  		+ " "+name);
@@ -89,7 +91,7 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> viewAllItemsByCategoryName(String categoryName) {
 		if(categoryName == null) throw new CategoryException("name is null") ; 
 		
-		Optional<Category> categoryOpt = categoryRepository.findCategoryByName(categoryName);
+		Optional<Category> categoryOpt = categoryRepository.findByCategoryName(categoryName);
 		
 		if(categoryOpt.isEmpty()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+categoryName);
@@ -107,7 +109,7 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> viewAllItemsByRestaurentName(String restaurentName) {
 		if(restaurentName == null) throw new CategoryException("name is null") ; 
 		
-		Optional<Category> categoryOpt = categoryRepository.findCategoryByName(restaurentName);
+		Optional<Category> categoryOpt = categoryRepository.findByCategoryName(restaurentName);
 		
 		if(categoryOpt.isEmpty()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+restaurentName);

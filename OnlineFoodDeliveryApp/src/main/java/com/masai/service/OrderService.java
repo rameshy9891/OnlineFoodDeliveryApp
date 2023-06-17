@@ -6,7 +6,7 @@ import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
 
 
-public interface IOrderService {
+public interface OrderService {
 	
 	public OrderDetails addOrder(OrderDetails order);
 	

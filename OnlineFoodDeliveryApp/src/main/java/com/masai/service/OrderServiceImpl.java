@@ -13,7 +13,7 @@ import com.masai.repository.FoodCartRepository;
 import com.masai.repository.OrderRepository;
 
 @Service
-public class IOrderServiceImpl implements IOrderService {
+public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private OrderRepository orderRepository;
@@ -92,14 +92,15 @@ public class IOrderServiceImpl implements IOrderService {
 	@Override
 	public List<OrderDetails> viewAllOrdersByRestaurant(Restaurant res) {
 		
-		return orderRepository.findAllByCart_Restaurant(res);
-		
+		//return orderRepository.findAllByCart_Restaurant(res);
+		return null;
 	}
 
 	@Override
 	public List<OrderDetails> viewAllOrdersByCustomer(Customer customer) {
 		
-		return orderRepository.findAllByCart_Customer(customer);
+		//return orderRepository.findAllByCart_Customer(customer);
+	  return null;
 	}
 
 }

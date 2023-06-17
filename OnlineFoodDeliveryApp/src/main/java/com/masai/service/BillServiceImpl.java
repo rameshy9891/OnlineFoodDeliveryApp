@@ -97,7 +97,7 @@ public class BillServiceImpl implements BillService{
 
 
 	@Override
-	public List<Bill> viewBillByDateRange(LocalDate startDate, LocalDate endDate) {
+ 	public List<Bill> viewBillByDateRange(LocalDate startDate, LocalDate endDate) {
 		// TODO Auto-generated method stub
 		
 		if(startDate==null && endDate==null) {
@@ -126,6 +126,14 @@ public class BillServiceImpl implements BillService{
 		
 	
 	}
+
+
+
+//@Override
+//public List<Bill> viewBillByDateRange(LocalDate startDate, LocalDate endDate) {
+//	// TODO Auto-generated method stub
+//	return null;
+//}
 
 	
 }

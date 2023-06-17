@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 public class ItemController {
 	
 	@Autowired
-	ItemService itemService;
+	private ItemService itemService;
 
 //	There's some confusion in this add Method
 	@PostMapping("/items/{categoryName}")
