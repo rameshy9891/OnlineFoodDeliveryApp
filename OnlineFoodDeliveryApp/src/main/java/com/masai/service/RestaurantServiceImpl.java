@@ -1,9 +1,11 @@
 package com.masai.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.masai.exception.BillException;
 import com.masai.exception.RestaurantException;
 import com.masai.model.Restaurant;
 import com.masai.repository.RestaurantrRepository;
@@ -21,9 +23,17 @@ public class RestaurantServiceImpl implements RestaurantService {
 		}
 		
 		
-		if(restaurantRepository.existsById(restaurant.getRestaurantId())) {
-			throw new RestaurantException(" Restaurant alredy present in the database");
+		
+		Optional<Restaurant> rest=  restaurantRepository.findById(restaurant.getRestaurantId());
+		
+		
+		if(rest.isPresent()) {
+			throw new RestaurantException("alredy present in the database");
 		}
+		
+//		if(restaurantRepository.existsById(restaurant.getRestaurantId())) {
+//			throw new RestaurantException(" Restaurant alredy present in the database");
+//		}
 	
 		
 		Restaurant restorentadd= restaurantRepository.save(restaurant);
@@ -40,7 +50,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 		
 		
 		if(!restaurantRepository.existsById(restaurant.getRestaurantId())) {
-			throw new RestaurantException("Restaurant is not present in the database");
+			throw new RestaurantException("Restaurant is not present in the database with this id"+restaurant.getRestaurantId());
 		}
 	
 		
@@ -52,19 +62,54 @@ public class RestaurantServiceImpl implements RestaurantService {
 	@Override
 	public Restaurant removeRestaurant(Restaurant res) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		if(res==null) {
+			throw new RestaurantException(" restaurant is null");
+		}
+		
+	Restaurant fordelete=	restaurantRepository.findById(res.getRestaurantId()).orElseThrow(()-> new RestaurantException("restaurant is not present in database with this id"+res.getRestaurantId()));
+		
+		restaurantRepository.delete(fordelete);
+		
+		return fordelete;
 	}
 
 	@Override
 	public List<Restaurant> viewBearByRestaurant(String location) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		if (location == null || location.isEmpty()) {
+			throw new RestaurantException("Location is null or empty");
+		}
+		
+	Optional<Restaurant>	restorentlocation = restaurantRepository.findCByLocationName(location);
+		
+	if(restorentlocation.isEmpty()) throw new RestaurantException("no restaurant of this location"+" " +location);
+	
+	List<Restaurant> restorentname= (List<Restaurant>) restorentlocation.get();
+	
+		
+		
+		return restorentname;
 	}
 
 	@Override
 	public List<Restaurant> viewBearByItemName(String name) {
 		// TODO Auto-generated method stub
-		return null;
+		
+		if (name == null || name.isEmpty()) {
+			throw new RestaurantException("Item name is null or empty");
+		}
+		
+		Optional<Restaurant>	restorentName = restaurantRepository.findCByRestaurantName(name);
+		
+		if(restorentName.isEmpty()) throw new RestaurantException("no restaurant of this name"+" " +name);
+		
+		List<Restaurant> restorentname= (List<Restaurant>) restorentName.get();
+		
+			
+			
+			return restorentname;
 	}
 
 }
