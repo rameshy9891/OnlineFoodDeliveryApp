@@ -4,16 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.masai.exception.BillException;
 import com.masai.exception.RestaurantException;
 import com.masai.model.Restaurant;
-import com.masai.repository.RestaurantrRepository;
+import com.masai.repository.RestaurantRepository;
 
+@Service
 public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Autowired
-	RestaurantrRepository restaurantRepository;
+	RestaurantRepository restaurantRepository;
 
 	@Override
 	public Restaurant addRestaurant(Restaurant restaurant) {
@@ -82,15 +83,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 			throw new RestaurantException("Location is null or empty");
 		}
 		
-	Optional<Restaurant>	restorentlocation = restaurantRepository.findCByLocationName(location);
+	//Optional<Restaurant>	restorentlocation = restaurantRepository.findByLocation(location);
 		
-	if(restorentlocation.isEmpty()) throw new RestaurantException("no restaurant of this location"+" " +location);
+//	if(restorentlocation.isEmpty()) throw new RestaurantException("no restaurant of this location"+" " +location);
+//	
+//	List<Restaurant> restorentname= (List<Restaurant>) restorentlocation.get();
 	
-	List<Restaurant> restorentname= (List<Restaurant>) restorentlocation.get();
-	
 		
 		
-		return restorentname;
+		//return restorentname;
+		return null;
 	}
 
 	@Override
@@ -101,7 +103,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 			throw new RestaurantException("Item name is null or empty");
 		}
 		
-		Optional<Restaurant>	restorentName = restaurantRepository.findCByRestaurantName(name);
+		Optional<Restaurant>	restorentName = restaurantRepository.findByRestaurantName(name);
 		
 		if(restorentName.isEmpty()) throw new RestaurantException("no restaurant of this name"+" " +name);
 		

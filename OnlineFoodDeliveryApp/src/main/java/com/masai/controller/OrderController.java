@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.masai.model.Customer;
 import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
-import com.masai.service.IOrderService;
+import com.masai.service.OrderService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ import jakarta.validation.Valid;
 public class OrderController {
 	
 	@Autowired
-	private IOrderService iOrderService;
+	private OrderService iOrderService;
 	
 	@PostMapping("/addOrder")
 	public ResponseEntity<OrderDetails> addOrderHandler(@Valid @RequestBody OrderDetails order){

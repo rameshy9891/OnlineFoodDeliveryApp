@@ -2,6 +2,8 @@ package com.masai.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,6 +32,7 @@ public class Category {
 	@NotNull(message ="Category Name cannot be blank")
 	private String categoryName;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<Item> items;
 

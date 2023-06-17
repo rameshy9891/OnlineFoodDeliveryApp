@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import com.masai.model.FoodCart;
 import com.masai.model.Item;
-import com.masai.service.ICartService;
+import com.masai.service.CartService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class FoodCartController {
 
 	@Autowired
-	private ICartService iCartService;
+	private CartService iCartService;
 	
 	@PutMapping("/addItem/{cartId}")
 	public ResponseEntity<FoodCart> addItemToCartHandler(@PathVariable("cartId") Integer cartId,

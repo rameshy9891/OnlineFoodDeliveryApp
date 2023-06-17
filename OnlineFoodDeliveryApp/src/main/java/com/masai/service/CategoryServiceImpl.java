@@ -7,12 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import com.masai.exception.CategoryException;
 import com.masai.model.Category;
 import com.masai.model.Item;
 import com.masai.repository.CategoryRepository;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
@@ -22,17 +24,18 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category addCategory(Category cat) {
 		if(cat == null) throw new CategoryException("Category is null") ; 
 		
-    	Optional<Category> category = categoryRepository.findById(cat.getCatId());
+    	Optional<Category> category = categoryRepository.findByCategoryName(cat.getCategoryName());
     	
     	if(category.isPresent()) throw new CategoryException("Category already present in database") ;
+//    	
+//    	Category cate = category.get();
+//    	List<Item> itemList = cate.getItems();
     	
-    	List<Item> itemList = cat.getItems();
-    	
-    	for(Item k : itemList ) {
-    		k.setCategory(cat);
-    	}
-    	
-    	cat.setItems(itemList);
+//    	for(Item k : itemList ) {
+//    		k.setCategory(cat);
+//    	}
+//    	
+//    	cat.setItems(itemList);
     	
     	return categoryRepository.save(cat);
 	}
@@ -41,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category updateCategory(Category cat) {
 		Optional<Category> categoryOpt = categoryRepository.findById(cat.getCatId());
 		
-		if(categoryOpt.isEmpty()) throw new CategoryException("There is no Category avaliable in the database with category name"
+		if(!categoryOpt.isPresent()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+cat.getCategoryName());
 		
 		Category category = categoryOpt.get();
@@ -53,8 +56,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category removeCategory(String catId) {
-		Optional<Category> categoryOpt = categoryRepository.findById(Integer.parseInt(catId));
+	public Category removeCategory(Integer catId) {
+		Optional<Category> categoryOpt = categoryRepository.findById(catId);
 		
 		if(!categoryOpt.isPresent()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+categoryOpt.get().getCategoryName());
@@ -71,7 +74,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category viewCategory(String name) {
-		Optional<Category> categoryOpt = categoryRepository.findCategoryByName(name);
+		Optional<Category> categoryOpt = categoryRepository.findByCategoryName(name);
 		
 		if(categoryOpt.isEmpty()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+name);

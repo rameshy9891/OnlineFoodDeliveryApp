@@ -4,7 +4,7 @@ import com.masai.model.FoodCart;
 import com.masai.model.Item;
 
 
-public interface ICartService {
+public interface CartService {
 	
 	public FoodCart addItemToCart(Integer cartId, Item item);
 	

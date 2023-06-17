@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Bill;
-import com.masai.service.BillServiceImpl;
+import com.masai.service.BillService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ import jakarta.validation.Valid;
 public class BillController {
 	
 	@Autowired
-	BillServiceImpl billservice;
+	private BillService billservice;
 	
 	@PostMapping("/bill/{orderId}")
 	public ResponseEntity<Bill> addBillHandler(@RequestBody @Valid Bill bill,Integer orderId){

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Customer;
@@ -60,14 +59,14 @@ public class CustomerController {
 	  return new ResponseEntity<>(cust,HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/Customer/{email}")
+	@DeleteMapping("/customer/{email}")
 	public ResponseEntity<Customer> deleteCutomer(@PathVariable("email") String email){
 		 
 		Customer cust =customerService.deleteCustomer( email);
 	  return new ResponseEntity<>(cust,HttpStatus.OK);
 	}
 	
-	@GetMapping("/Customers/{email}")
+	@GetMapping("/customers/{email}")
 	public ResponseEntity<Customer> viewCutomer(@PathVariable("email") String email){
 		 
 		Customer cust =customerService.getCustomerDetailsByEmail(email);

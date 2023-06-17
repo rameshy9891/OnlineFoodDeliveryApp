@@ -23,7 +23,7 @@ import jakarta.validation.Valid;
 public class CategoryController {
 
 	@Autowired
-	CategoryService categoryService ;
+	private CategoryService categoryService ;
 	
 	
 	@PostMapping("/categories")
@@ -48,7 +48,7 @@ public class CategoryController {
 	
 	
 	@DeleteMapping("/categories/{catId}")
-	public ResponseEntity<Category> removeCategory(@PathVariable("catId") String catId){
+	public ResponseEntity<Category> removeCategory(@PathVariable("catId") Integer catId){
 		 
 	Category cat = categoryService.removeCategory(catId);
 	
