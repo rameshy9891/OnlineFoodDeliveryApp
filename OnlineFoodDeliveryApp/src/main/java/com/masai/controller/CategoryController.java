@@ -2,11 +2,10 @@ package com.masai.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Category;
-import com.masai.model.Customer;
 import com.masai.service.CategoryService;
 
 import jakarta.validation.Valid;
@@ -42,9 +40,9 @@ public class CategoryController {
 	@PutMapping("/categories")
 	public ResponseEntity<Category> updateCategory(@RequestBody @Valid Category category){
 		
-		Category cat = categoryService.updateCategory(category);
+		Category updatedCat = categoryService.updateCategory(category);
 		
-		return new ResponseEntity<Category>(cat, HttpStatus.ACCEPTED);
+		return new ResponseEntity<Category>(updatedCat, HttpStatus.ACCEPTED);
 	}
 	
 	
@@ -72,8 +70,9 @@ public class CategoryController {
 	   public ResponseEntity<List<Category>> viewAllCategory() {	    	
 	   	List<Category> categories = categoryService.viewAllCategory();
 	   	
-	   	ResponseEntity<List<Category>> allCategory = new ResponseEntity<>(categories, HttpStatus.OK);
-	   	
-		return allCategory;
+	   	return new ResponseEntity<>(categories, HttpStatus.OK);
+
 	}
+	
+	
 }
