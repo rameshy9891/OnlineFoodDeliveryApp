@@ -49,18 +49,19 @@ public class IOrderServiceImpl implements IOrderService {
 		
 		if(order != null) {
 			
+			updatedOrder = orderRepository.findById(order.getOrderDetailId())
+					.orElseThrow(()->new OrderException("Order is not present with this id"));
+			
 			FoodCart cart = order.getCart();
 			
 	        cart.getOrderList().add(order); // Add order to the food cart
 	        order.setCart(cart); // Set the food cart in the order
-	        
-	        updatedOrder = orderRepository.save(order);
 			
 		}else {
 			throw new OrderException("Order can not be null");
 		}
 		
-		return updatedOrder;
+		return  orderRepository.save(order);
 	}
 
 	@Override
