@@ -26,9 +26,15 @@ public class CategoryServiceImpl implements CategoryService {
     	
     	if(category.isPresent()) throw new CategoryException("Category already present in database") ;
     	
-    	List<Item> catItems = category.get().getItems();
+    	List<Item> itemList = cat.getItems();
     	
-    	return categoryRepository.save(category.get());
+    	for(Item k : itemList ) {
+    		k.setCategory(cat);
+    	}
+    	
+    	cat.setItems(itemList);
+    	
+    	return categoryRepository.save(cat);
 	}
 
 	@Override
@@ -42,8 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		category.setCategoryName(cat.getCategoryName());
 		category.getItems().addAll(cat.getItems());
-		
-		return category;
+		return categoryRepository.save(cat);
 		
 	}
 
@@ -51,7 +56,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category removeCategory(String catId) {
 		Optional<Category> categoryOpt = categoryRepository.findById(Integer.parseInt(catId));
 		
-		if(categoryOpt.isEmpty()) throw new CategoryException("There is no Category avaliable in the database with category name"
+		if(!categoryOpt.isPresent()) throw new CategoryException("There is no Category avaliable in the database with category name"
 		  		+ " "+categoryOpt.get().getCategoryName());
 		
 		
@@ -73,7 +78,7 @@ public class CategoryServiceImpl implements CategoryService {
 		
 		Category category = categoryOpt.get();
 			
-			return category;
+		return category;
 		  
 	}
 
@@ -82,7 +87,9 @@ public class CategoryServiceImpl implements CategoryService {
 		Pageable pageable = PageRequest.of(0,5, Sort.by("categoryName").ascending());
 		
 		List<Category> categories = categoryRepository.findAll(pageable).getContent();
+		
 		if(categories.isEmpty()) throw new CategoryException("category list is Empty");
+		
 		return categories;
 	}
 
