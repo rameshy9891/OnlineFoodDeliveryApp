@@ -14,9 +14,9 @@ public interface IOrderService {
 	
 	public OrderDetails removeOrder(OrderDetails order);
 	
-	public OrderDetails viewOrder(OrderDetails order);
+	public OrderDetails viewOrder(Integer orderId);
 	
-	public List<OrderDetails> viewAllOrders(Restaurant res);
+	public List<OrderDetails> viewAllOrdersByRestaurant(Restaurant res);
 	
-	public List<OrderDetails> viewAllOrders(Customer customer);
+	public List<OrderDetails> viewAllOrdersByCustomer(Customer customer);
 }
