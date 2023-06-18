@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Delete Customer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #f44336;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Delete Customer</h1>
+  <form id="deleteForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <button type="button" onclick="deleteCustomer()">Delete</button>
+  </form>
+
+  <script>
+    function deleteCustomer() {
+      let email = document.getElementById("email").value;
+
+      // Simulate an API request
+      setTimeout(() => {
+        // Simulated response
+        const response = {
+          status: "success",
+          message: "Customer deleted successfully!"
+        };
+
+        // Handle the response
+        if (response.status === "success") {
+          alert(response.message);
+          // Reset the form
+          document.getElementById("deleteForm").reset();
+        } else {
+          alert("Failed to delete customer.");
+        }
+      }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+    }
+  </script>
+</body>
+</html>

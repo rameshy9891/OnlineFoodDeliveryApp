@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    select {
+      height: 34px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customer Registration Form</h1>
+  <form id="registrationForm">
+    <label for="firstname">First Name:</label>
+    <input type="text" id="firstname" name="firstname" required>
+  
+    <label for="lastname">Last Name:</label>
+    <input type="text" id="lastname" name="lastname" required>
+  
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+  
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender" required>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+  
+    <label for="street">Street:</label>
+    <input type="text" id="street" name="street" required>
+  
+    <label for="area">Area:</label>
+    <input type="text" id="area" name="area" required>
+  
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state" required>
+  
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country" required>
+  
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" name="mobile" required>
+  
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+      <option value="customer">Customer</option>
+      <option value="admin">Admin</option>
+    </select>
+  
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+  
+    <label for="building">Building:</label>
+    <input type="text" id="building" name="building" required>
+  
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required>
+  
+    <label for="pincode">Pincode:</label>
+    <input type="text" id="pincode" name="pincode" required>
+  
+    <button type="button" onclick="registerCustomer()">Register</button>
+  </form>
+  
+  <script>
+    function registerCustomer() {
+      // JavaScript code for registering the customer goes here
+
+
+      let fname = document.getElementById("firstname").value;
+    let lname = document.getElementById("lastname").value;
+    let age = document.getElementById("age").value;
+    let gender = document.getElementById("gender").value;
+    let email = document.getElementById("email").value;
+    let street = document.getElementById("street").value;
+    let area = document.getElementById("area").value;
+    let state = document.getElementById("state").value;
+    let country = document.getElementById("country").value;
+    let mobile = document.getElementById("mobile").value;
+    let role = document.getElementById("role").value;
+    let password = document.getElementById("password").value;
+    let building = document.getElementById("building").value;
+    let city = document.getElementById("city").value;
+    let pincode = document.getElementById("pincode").value;
+      // ... retrieve other form values
+      
+      let data = {
+        "firstName": fname,
+      "lastName": lname,
+      "age": age,
+      "gender": gender,
+      "mobileNumber": mobile,
+      "address": {
+        "buildingName": building,
+        "streetNo": street,
+        "area": area,
+        "city": city,
+        "state": state,
+        "country": country,
+        "pincode": pincode
+      },
+      "email": email,
+      "password": password,
+      "role": role
+        // ... other form data
+      };
+
+      // Replace the URL below with your actual API endpoint
+      let url = "http://localhost:9000/customers";
+      
+      fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        // Handle the API response here
+        showmydata(result);
+      })
+      .catch(error => {
+        // Handle any error during the API call
+        console.log('Error:', error);
+      });
+
+
+      
+
+    }
+
+    function showmydata(data){
+  let main = document.getElementById("main")
+  console.log(data.name , "53");
+
+let div=document.createElement("div")
+
+let title=document.createElement("h1")
+title.innerText=data.name
+
+let body=document.createElement("h1")
+body.innerText=data.email
+
+div.append(title,body)
+main.append(div)
+
+}
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+    }
+
+    .card-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-heading">Category Management</h1>
+    <div>
+      <input type="text" id="currentNameInput" placeholder="Enter Current Category Name">
+      <input type="text" id="newNameInput" placeholder="Enter New Category Name">
+      <button class="card-button" onclick="updateCategory()">Update Category</button>
+    </div>
+  </div>
+
+  <script>
+    function simulateApiRequest(currentName, newName) {
+      return new Promise((resolve, reject) => {
+        // Simulate the API request
+        setTimeout(() => {
+          resolve(); // Simulated successful response
+        }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+      });
+    }
+
+    function updateCategory() {
+      const currentName = document.getElementById("currentNameInput").value;
+      const newName = document.getElementById("newNameInput").value;
+
+      if (!currentName || !newName) {
+        console.error("Both current and new category names are required.");
+        return;
+      }
+
+      simulateApiRequest(currentName, newName)
+        .then(() => {
+          console.log("Category updated successfully!");
+          // Perform any additional actions or update UI as needed
+
+          // Reset the input fields
+          document.getElementById("currentNameInput").value = "";
+          document.getElementById("newNameInput").value = "";
+        })
+        .catch(error => {
+          console.error("Failed to update category:", error);
+          // Handle error and display appropriate message or UI feedback
+        });
+    }
+  </script>
+</body>
+</html>

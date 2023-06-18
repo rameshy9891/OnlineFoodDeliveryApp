@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+    }
+
+    .card-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-heading">Category Management</h1>
+    <div>
+      <button class="card-button" onclick="viewAllCategories()">View All Categories</button>
+    </div>
+  </div>
+
+  <script>
+    function simulateApiRequest() {
+      return new Promise((resolve, reject) => {
+        // Simulate the API request
+        setTimeout(() => {
+          // Simulated response data
+          const categories = [
+            { id: 1, name: "Category 1" },
+            { id: 2, name: "Category 2" },
+            { id: 3, name: "Category 3" }
+          ];
+          resolve(categories);
+        }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+      });
+    }
+
+    function viewAllCategories() {
+      simulateApiRequest()
+        .then(categories => {
+          console.log("Categories:", categories);
+          // Perform any additional actions or update UI as needed
+          displayCategories(categories);
+        })
+        .catch(error => {
+          console.error("Failed to fetch categories:", error);
+          // Handle error and display appropriate message or UI feedback
+        });
+    }
+
+    function displayCategories(categories) {
+      // Get the container element to display the categories
+      const container = document.getElementById("categories-container");
+      container.innerHTML = ""; // Clear any existing categories
+
+      // Create a list of categories and append them to the container
+      const ul = document.createElement("ul");
+      categories.forEach(category => {
+        const li = document.createElement("li");
+        li.textContent = `${category.id}: ${category.name}`;
+        ul.appendChild(li);
+      });
+
+      container.appendChild(ul);
+    }
+  </script>
+
+  <div id="categories-container"></div>
+</body>
+</html>

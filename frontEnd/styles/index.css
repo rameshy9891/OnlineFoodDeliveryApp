@@ -57,7 +57,7 @@ body {
 
 .btn{
     padding: 10px 20px;
-    color: aliceblue;
+    color: rgb(138, 174, 206);
     background-color: #18e01b;
     border-radius: 10px;
     border: 0;
@@ -125,6 +125,109 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
+
+
+/*chat gpt stayle   start here */
+body {
+  background-color: #f7f7f7;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  text-align: center;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.card-button:hover {
+  background-color: #45a049;
+}
+
+.card-button:active {
+  background-color: #3e8e41;
+}
+
+.card-button:focus {
+  outline: none;
+}
+
+/* Additional styles for spacing and alignment */
+.card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; /* Align buttons in a row with space between */
+  align-items: center; /* Center buttons vertically */
+}
+
+.card-heading {
+  margin-bottom: 15px;
+}
+
+.card-button {
+  flex: 1; /* Distribute available space equally among buttons */
+  max-width: 200px; /* Limit the width of each button if needed */
+}
+
+
+/* Additional styles for spacing and alignment */
+.card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between; /* Align buttons in a row with space between */
+  align-items: center; /* Center buttons vertically */
+}
+
+.card-heading {
+  margin-bottom: 15px;
+}
+
+.card-button {
+  flex: 1; /* Distribute available space equally among buttons */
+  max-width: 200px; /* Limit the width of each button if needed */
+}
+
+
+/* Additional styles for spacing and alignment */
+.card div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-heading {
+  margin-bottom: 15px;
+}
+
+.card-button:nth-child(5n) {
+  margin-right: 0;
+}
+
+.card-button:nth-last-child(-n+5) {
+  margin-bottom: 0;
+}
+
 
 
 

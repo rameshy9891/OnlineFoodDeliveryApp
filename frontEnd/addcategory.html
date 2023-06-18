@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+    }
+
+    .card-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-heading">Category Management</h1>
+    <div>
+      <input type="text" id="categoryNameInput" placeholder="Enter Category Name">
+      <button class="card-button" onclick="addCategory()">Add Category</button>
+    </div>
+  </div>
+
+  <script>
+    function simulateApiRequest(category) {
+      return new Promise((resolve, reject) => {
+        // Simulate the API request
+        setTimeout(() => {
+          resolve(); // Simulated successful response
+        }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+      });
+    }
+
+    function addCategory() {
+      const categoryName = document.getElementById("categoryNameInput").value;
+      if (!categoryName) {
+        console.error("Category name is required.");
+        return;
+      }
+
+      const category = {
+        categoryName: categoryName
+      };
+
+      simulateApiRequest(category)
+        .then(() => {
+          console.log("Category added successfully!");
+          // Perform any additional actions or update UI as needed
+
+          // Reset the input field
+          document.getElementById("categoryNameInput").value = "";
+        })
+        .catch(error => {
+          console.error("Failed to add category:", error);
+          // Handle error and display appropriate message or UI feedback
+        });
+    }
+  </script>
+</body>
+</html>

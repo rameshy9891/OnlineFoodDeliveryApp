@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+    }
+
+    .card-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .input-field {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-heading">Category Management</h1>
+    <div>
+      <div class="input-field">
+        <label for="categoryId">Category ID:</label>
+        <input type="text" id="categoryId">
+      </div>
+      <button class="card-button" onclick="viewCategory()">View Category</button>
+    </div>
+  </div>
+
+  <script>
+    function simulateApiRequest(categoryId) {
+      return new Promise((resolve, reject) => {
+        // Simulate the API request
+        setTimeout(() => {
+          // Simulated response data
+          const categories = [
+            { id: 1, name: "Category 1" },
+            { id: 2, name: "Category 2" },
+            { id: 3, name: "Category 3" }
+          ];
+
+          const category = categories.find(cat => cat.id === parseInt(categoryId));
+          if (category) {
+            resolve(category);
+          } else {
+            reject("Category not found");
+          }
+        }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+      });
+    }
+
+    function viewCategory() {
+      const categoryId = document.getElementById("categoryId").value;
+
+      simulateApiRequest(categoryId)
+        .then(category => {
+          console.log("Category:", category);
+          // Perform any additional actions or update UI as needed
+        })
+        .catch(error => {
+          console.error("Failed to fetch category:", error);
+          // Handle error and display appropriate message or UI feedback
+        });
+    }
+  </script>
+</body>
+</html>

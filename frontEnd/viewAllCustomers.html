@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View All Customers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .error-message {
+      color: red;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>View All Customers</h1>
+
+  <table id="customerTable">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th>Email</th>
+        <th>Address</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div id="errorMessage" class="error-message"></div>
+
+  <script>
+    function viewAllCustomers() {
+      // Simulate an API request
+      setTimeout(() => {
+        // Simulated response
+        const response = {
+          status: "success",
+          customers: [
+            {
+              firstName: "John",
+              lastName: "Doe",
+              age: 30,
+              email: "john.doe@example.com",
+              address: {
+                buildingName: "ABC Building",
+                streetNo: "123",
+                area: "XYZ Area",
+                city: "City",
+                state: "State",
+                country: "Country",
+                pincode: "12345"
+              }
+            },
+            {
+              firstName: "Jane",
+              lastName: "Smith",
+              age: 25,
+              email: "jane.smith@example.com",
+              address: {
+                buildingName: "DEF Building",
+                streetNo: "456",
+                area: "PQR Area",
+                city: "City",
+                state: "State",
+                country: "Country",
+                pincode: "67890"
+              }
+            }
+            // Add more customer objects as needed
+          ]
+        };
+
+        // Handle the response
+        if (response.status === "success") {
+          displayCustomerTable(response.customers);
+        } else {
+          displayErrorMessage("Failed to view customers.");
+        }
+      }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+    }
+
+    function displayCustomerTable(customers) {
+      const customerTableBody = document.querySelector("#customerTable tbody");
+
+      // Clear existing table rows
+      customerTableBody.innerHTML = "";
+
+      // Add customer rows to the table
+      customers.forEach(customer => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${customer.firstName}</td>
+          <td>${customer.lastName}</td>
+          <td>${customer.age}</td>
+          <td>${customer.email}</td>
+          <td>${customer.address.buildingName}, ${customer.address.streetNo}, ${customer.address.area}, ${customer.address.city}, ${customer.address.state}, ${customer.address.country}, ${customer.address.pincode}</td>
+        `;
+        customerTableBody.appendChild(row);
+      });
+    }
+
+    function displayErrorMessage(message) {
+      const errorMessage = document.getElementById("errorMessage");
+      errorMessage.textContent = message;
+    }
+
+    // Call the function to view all customers
+    viewAllCustomers();
+  </script>
+</body>
+</html>

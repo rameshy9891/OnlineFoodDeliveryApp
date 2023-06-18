@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Category Management</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .card {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card-heading {
+      text-align: center;
+    }
+
+    .card-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 class="card-heading">Category Management</h1>
+    <div>
+      <input type="text" id="categoryIdInput" placeholder="Enter Category ID">
+      <button class="card-button" onclick="deleteCategory()">Delete Category</button>
+    </div>
+  </div>
+
+  <script>
+    function simulateApiRequest(categoryId) {
+      return new Promise((resolve, reject) => {
+        // Simulate the API request
+        setTimeout(() => {
+          resolve(); // Simulated successful response
+        }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+      });
+    }
+
+    function deleteCategory() {
+      const categoryId = document.getElementById("categoryIdInput").value;
+
+      if (!categoryId) {
+        console.error("Category ID is required.");
+        return;
+      }
+
+      simulateApiRequest(categoryId)
+        .then(() => {
+          console.log("Category deleted successfully!");
+          // Perform any additional actions or update UI as needed
+
+          // Reset the input field
+          document.getElementById("categoryIdInput").value = "";
+        })
+        .catch(error => {
+          console.error("Failed to delete category:", error);
+          // Handle error and display appropriate message or UI feedback
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Customer Update</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    select {
+      height: 34px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h1>Customer Update Form</h1>
+  <form id="updateForm">
+    <label for="mobile">Mobile Number:</label>
+    <input type="text" id="mobile" name="mobile" required>
+  
+    <label for="building">Building Name:</label>
+    <input type="text" id="building" name="building" required>
+  
+    <label for="street">Street No:</label>
+    <input type="text" id="street" name="street" required>
+  
+    <label for="area">Area:</label>
+    <input type="text" id="area" name="area" required>
+  
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city" required>
+  
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state" required>
+  
+    <label for="country">Country:</label>
+    <input type="text" id="country" name="country" required>
+  
+    <label for="pincode">Pincode:</label>
+    <input type="text" id="pincode" name="pincode" required>
+  
+    <button type="button" onclick="updateCustomer()">Update</button>
+  </form>
+  
+  <script>
+    function updateCustomer() {
+      let mobile = document.getElementById("mobile").value;
+      let building = document.getElementById("building").value;
+      let street = document.getElementById("street").value;
+      let area = document.getElementById("area").value;
+      let city = document.getElementById("city").value;
+      let state = document.getElementById("state").value;
+      let country = document.getElementById("country").value;
+      let pincode = document.getElementById("pincode").value;
+  
+      let requestData = {
+        mobileNumber: mobile,
+        address: {
+          buildingName: building,
+          streetNo: street,
+          area: area,
+          city: city,
+          state: state,
+          country: country,
+          pincode: pincode
+        }
+      };
+  
+      // Simulate an API request
+      setTimeout(() => {
+        // Simulated response
+        const response = {
+          status: "success",
+          message: "Customer updated successfully!"
+        };
+  
+        // Handle the response
+        if (response.status === "success") {
+          alert(response.message);
+          // Reset the form
+          document.getElementById("updateForm").reset();
+        } else {
+          alert("Failed to update customer.");
+        }
+      }, 2000); // Simulate a delay of 2 seconds (2000 milliseconds)
+    }
+  </script>
+</body>
+</html>
