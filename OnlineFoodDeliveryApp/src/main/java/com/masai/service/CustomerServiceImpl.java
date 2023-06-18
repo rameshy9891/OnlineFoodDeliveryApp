@@ -33,6 +33,7 @@ public class CustomerServiceImpl implements CustomerService{
     	FoodCart foodCart = new FoodCart();
     	  
     	 foodCart.setCustomer(customer);
+    	 customer.setFoodCart(foodCart);
     	  
     		return customerRepository.save(customer) ;
 	}

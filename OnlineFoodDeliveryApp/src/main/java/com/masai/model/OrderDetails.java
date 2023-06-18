@@ -1,10 +1,18 @@
 package com.masai.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,14 +29,14 @@ public class OrderDetails {
     private Integer orderDetailId;
 
     @NotNull(message = "Order date is required")
-    private LocalDateTime orderDate;
-
-    @NotNull(message = "FoodCart is required")
+    private LocalDate orderDate;
+    
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "foodcartId")
     private FoodCart cart;
 
-    @NotBlank(message = "Order status should not be blank")
-    private String orderStatus;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
 }

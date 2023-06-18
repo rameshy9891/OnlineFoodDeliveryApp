@@ -2,6 +2,7 @@ package com.masai.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,10 @@ public class ItemController {
 	private ItemService itemService;
 
 //	There's some confusion in this add Method
-	@PostMapping("/items/{categoryName}")
-	public ResponseEntity<Item> addNewCategory(@RequestBody @Valid Item item, @PathVariable("categoryName") String categoryName ){
+	@PostMapping("/items/{categoryName}/{restaurantName}")
+	public ResponseEntity<Item> addNewCategory(@RequestBody @Valid Item item, @PathVariable("categoryName") String categoryName, @PathVariable("restaurantName") String resName ){
 
-		Item addedItem = itemService.addItem(item, categoryName);
+		Item addedItem = itemService.addItem(item, categoryName, resName);
 		
 		return new ResponseEntity<>(addedItem,HttpStatus.CREATED);
 		
@@ -43,7 +44,7 @@ public class ItemController {
 		return new ResponseEntity<Item>(updatedItem, HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/items/{itemName}")
+	@GetMapping("/item/{itemName}")
 	public ResponseEntity<Item> viewCategory(@PathVariable("itemName") String catName){
 		
 		Item item = itemService.viewItem(catName);
@@ -68,7 +69,7 @@ public class ItemController {
 		return new ResponseEntity<>(items,HttpStatus.OK);
 	}
 	
-	@GetMapping("/items/{restaurentName}")
+	@GetMapping("/itemslist/{restaurentName}")
 	public ResponseEntity<List<Item>> getAllItemyRestaurent(@PathVariable("restaurentName") String resName){
 		
 		List<Item> items = itemService.viewAllItemsByRestaurentName(resName);

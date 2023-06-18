@@ -1,14 +1,17 @@
 package com.masai.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.CustomerException;
 import com.masai.exception.OrderException;
 import com.masai.model.Customer;
 import com.masai.model.FoodCart;
 import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
+import com.masai.repository.CustomerRepository;
 import com.masai.repository.FoodCartRepository;
 import com.masai.repository.OrderRepository;
 
@@ -20,26 +23,31 @@ public class OrderServiceImpl implements OrderService {
 	
 	 @Autowired
 	 private FoodCartRepository foodCartRepository;
+	 
+	 @Autowired
+	 private CustomerRepository customerRepository;
 	
 	@Override
-	public OrderDetails addOrder(OrderDetails order) {
+	public OrderDetails addOrder(OrderDetails order, String email) {
+       if(email==null) throw new CustomerException("Please provide Valid data");
 		
-		OrderDetails savedOrder; 
+		Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
 		
-		if(order != null) {
+		FoodCart cart =customer.getFoodCart();
+//		OrderDetails savedOrder; 
+//		
+//		if(order != null) {
 			
-			FoodCart cart = order.getCart();
+			//FoodCart cart = order.getCart();
 			
 	        cart.getOrderList().add(order); // Add order to the food cart
 	        order.setCart(cart); // Set the food cart in the order
 	        
-			savedOrder = orderRepository.save(order);
+			return orderRepository.save(order);
 			
-		}else {
-			throw new OrderException("Order can not be null");
-		}
 		
-		return savedOrder;
+		
+		
 	}
 
 	@Override

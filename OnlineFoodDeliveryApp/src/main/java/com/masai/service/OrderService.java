@@ -8,7 +8,7 @@ import com.masai.model.Restaurant;
 
 public interface OrderService {
 	
-	public OrderDetails addOrder(OrderDetails order);
+	public OrderDetails addOrder(OrderDetails order, String email);
 	
 	public OrderDetails updateOrder(OrderDetails order);
 	

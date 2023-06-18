@@ -6,10 +6,15 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.exception.CustomerException;
 import com.masai.exception.FoodCartException;
+import com.masai.exception.ItemException;
+import com.masai.model.Customer;
 import com.masai.model.FoodCart;
 import com.masai.model.Item;
+import com.masai.repository.CustomerRepository;
 import com.masai.repository.FoodCartRepository;
+import com.masai.repository.ItemRepository;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -17,123 +22,112 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private FoodCartRepository foodCartRepository;
 	
+	@Autowired
+	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private ItemRepository itemRepository;
+	
 	@Override
-	public FoodCart addItemToCart(Integer cartId, Item item) {
+	public FoodCart addItemToCart(String email, String name, Integer quantity) {
+		if(email==null || name == null) throw new CustomerException("Please provide Valid data");
 		
-		Optional<FoodCart> opt = foodCartRepository.findById(cartId);
+		Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
 		
-		FoodCart existedCart;
+		FoodCart existedCart =customer.getFoodCart();
 		
-		if(opt.isPresent()) {
-			
-			existedCart = opt.get();
-			
-			existedCart.getItemList().add(item);
-			
-			existedCart = foodCartRepository.save(existedCart); // Save the updated FoodCart
-			
-		}else {
-			throw new FoodCartException("Invalid FoodCartId");
-		}
+	    Item item=	itemRepository.findByItemName(name).orElseThrow(()-> new ItemException("Invalid Item name"));
+		item.setQuantity(quantity);
+		existedCart.getItemList().add(item);
+		
+
+			//existedCart = foodCartRepository.save(existedCart); // Save the updated FoodCart
+		customerRepository.save(customer);
 		
 		return existedCart;
 		
 	}
 
 	@Override
-	public FoodCart increaseQuantity(Integer cartId, Integer itemId, Integer quantity) {
+	public FoodCart increaseQuantity(String email, String name, Integer quantity) {
 		
-		Optional<FoodCart> opt = foodCartRepository.findById(cartId);
+if(email==null || name == null) throw new CustomerException("Please provide Valid data");
 		
-		if (opt.isPresent()) {
-			
-	        FoodCart existedCart = opt.get();
-	        
-	        // Find the item in the FoodCart's item list
-	        Optional<Item> optItem = existedCart.getItemList().stream()
-	                .filter(i -> i.getItemId().equals(itemId))
-	                .findFirst();
+		Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
 		
-	        if (optItem.isPresent()) {
-	        	
-	            Item existingItem = optItem.get();
-	            
-	            // Increase the quantity of the item
-	            existingItem.setQuantity(existingItem.getQuantity() + quantity);
-	            
-	        } else {
-	        	
-	            throw new FoodCartException("Invalid ItemId");
-	            
-	        }
+		FoodCart existedCart =customer.getFoodCart();
+		
+	    Item item=	itemRepository.findByItemName(name).orElseThrow(()-> new ItemException("Invalid Item name"));
+		
 	        
-	        // Save the updated FoodCart in the repository
-	        return foodCartRepository.save(existedCart);
+
+	            item.setQuantity(item.getQuantity() + quantity);
+	            
 	        
-	    } else {
-	        throw new FoodCartException("Invalid FoodCartId");
-	    }
+	        
+	       
+	         customerRepository.save(customer);
+	        return existedCart;
+	    
 	        
 	}
 
 	@Override
-	public FoodCart reduceQuantity(Integer cartId, Integer itemId, Integer quantity) {
+	public FoodCart reduceQuantity(String email, String name, Integer quantity) {
 		
-		Optional<FoodCart> opt = foodCartRepository.findById(cartId);
+if(email==null || name == null) throw new CustomerException("Please provide Valid data");
 		
-		if (opt.isPresent()) {
-			
-	        FoodCart existedCart = opt.get();
-	        
-	        // Find the item in the FoodCart's item list
-	        Optional<Item> optItem = existedCart.getItemList().stream()
-	                .filter(i -> i.getItemId().equals(itemId))
-	                .findFirst();
+		Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
 		
-	        if (optItem.isPresent()) {
-	        	
-	            Item existingItem = optItem.get();
-	            
-	            // Increase the quantity of the item
-	            existingItem.setQuantity(existingItem.getQuantity() - quantity);
-	            
-	        } else {
-	        	
-	            throw new FoodCartException("Invalid ItemId");
-	            
-	        }
+		FoodCart existedCart =customer.getFoodCart();
+		
+	    Item item=	itemRepository.findByItemName(name).orElseThrow(()-> new ItemException("Invalid Item name"));
+		
 	        
-	        // Save the updated FoodCart in the repository
-	        return foodCartRepository.save(existedCart);
+
+	            item.setQuantity(item.getQuantity() - quantity);
+	            
 	        
-	    } else {
-	        throw new FoodCartException("Invalid FoodCartId");
-	    }
+	        
+	       
+	         customerRepository.save(customer);
+	        return existedCart;
+	    
 	}
 
 	@Override
-	public FoodCart removeItem(Integer cartId, Integer itemId) {
+	public FoodCart removeItem(String email, String itemName) {
 		
-		FoodCart existedCart = foodCartRepository.findById(cartId)
-								.orElseThrow(() -> new FoodCartException("Invalid FoodCartId"));
+       if(email==null || itemName == null) throw new CustomerException("Please provide Valid data");
+		
+		Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
+		 
+        FoodCart existedCart =customer.getFoodCart();
+		
+	    Item ite=	itemRepository.findByItemName(itemName).orElseThrow(()-> new ItemException("Invalid Item name"));
+		
+
 		
 		List<Item> itemList = existedCart.getItemList();
-	    itemList.removeIf(item -> item.getItemId().equals(itemId));   //removing item from list
+	    itemList.removeIf(item -> item.getItemName().equals(itemName));   //removing item from list
 	    
-	    existedCart = foodCartRepository.save(existedCart); // Save the updated FoodCart
+	     customerRepository.save(customer); // Save the updated FoodCart
 	    
 	    return existedCart;
 	}
 
 	@Override
-	public FoodCart clearCart(Integer cartId) {
-		
-		FoodCart existedCart = foodCartRepository.findById(cartId)
-				.orElseThrow(() -> new FoodCartException("Invalid FoodCartId"));
+	public FoodCart clearCart(String email) {
+		  if(email==null ) throw new CustomerException("Please provide Valid data");
+			
+			Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
+			 
+	        FoodCart existedCart =customer.getFoodCart();
+			
 		
 		existedCart.getItemList().clear();  //clearing all items
 		
-		foodCartRepository.save(existedCart); // Save the updated FoodCart
+		customerRepository.save(customer); // Save the updated FoodCart
 		
 		return  existedCart; 
 	}
