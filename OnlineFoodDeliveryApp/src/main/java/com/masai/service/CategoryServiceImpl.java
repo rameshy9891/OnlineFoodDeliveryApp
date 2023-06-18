@@ -41,17 +41,17 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category updateCategory(Category cat) {
-		Optional<Category> categoryOpt = categoryRepository.findById(cat.getCatId());
+	public Category updateCategory(String oldName, String newName) {
+		Optional<Category> categoryOpt = categoryRepository.findByCategoryName(oldName);
 		
 		if(!categoryOpt.isPresent()) throw new CategoryException("There is no Category avaliable in the database with category name"
-		  		+ " "+cat.getCategoryName());
+		  		+ " "+oldName);
 		
 		Category category = categoryOpt.get();
 		
-		category.setCategoryName(cat.getCategoryName());
-		category.getItems().addAll(cat.getItems());
-		return categoryRepository.save(cat);
+		category.setCategoryName(newName);
+		//category.getItems().addAll(cat.getItems());
+		return categoryRepository.save(category);
 		
 	}
 

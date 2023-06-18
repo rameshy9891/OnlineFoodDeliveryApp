@@ -5,36 +5,37 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Customer;
 import com.masai.model.OrderDetails;
 import com.masai.model.Restaurant;
 import com.masai.service.OrderService;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
-@Repository
+@RestController
 public class OrderController {
 	
 	@Autowired
 	private OrderService iOrderService;
 	
-	@PostMapping("/addOrder")
-	public ResponseEntity<OrderDetails> addOrderHandler(@Valid @RequestBody OrderDetails order){
+	@PostMapping("/addOrder/{email}")
+	public ResponseEntity<OrderDetails> addOrderHandler(@Valid @RequestBody OrderDetails order,
+			@PathVariable("email") String email){
 		
-		OrderDetails placedOrder = iOrderService.addOrder(order);
+		OrderDetails placedOrder = iOrderService.addOrder(order,email);
 		
 		return new ResponseEntity<OrderDetails>(placedOrder,HttpStatus.CREATED);
 	}
 	
-	@PatchMapping("/updateOrder")
+	@PutMapping("/updateOrder")
 	public ResponseEntity<OrderDetails> updateOrderHandler(@Valid @RequestBody OrderDetails order){
 		
 		OrderDetails updatedOrder = iOrderService.updateOrder(order);

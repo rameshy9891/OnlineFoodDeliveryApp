@@ -6,14 +6,14 @@ import com.masai.model.Item;
 
 public interface CartService {
 	
-	public FoodCart addItemToCart(Integer cartId, Item item);
+	public FoodCart addItemToCart(String email, String name, Integer quantity);
 	
-	public FoodCart increaseQuantity(Integer cartId, Integer itemId, Integer quantity);
+	public FoodCart increaseQuantity(String email, String name, Integer quantity);
 	
-	public FoodCart reduceQuantity(Integer cartId, Integer itemId, Integer quantity);
+	public FoodCart reduceQuantity(String email, String name, Integer quantity);
 	
-	public FoodCart removeItem(Integer cartId, Integer itemId);
+	public FoodCart removeItem(String email, String itemName);
 	
-	public FoodCart clearCart(Integer cartId);
+	public FoodCart clearCart(String email);
 	
 }

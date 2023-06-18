@@ -2,7 +2,6 @@ package com.masai.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.model.Category;
@@ -37,10 +37,10 @@ public class CategoryController {
 	
 	
 	
-	@PutMapping("/categories")
-	public ResponseEntity<Category> updateCategory(@RequestBody @Valid Category category){
+	@PutMapping("/categories/{name}")
+	public ResponseEntity<Category> updateCategory(@PathVariable("name") String oldName, @RequestParam String newName){
 		
-		Category updatedCat = categoryService.updateCategory(category);
+		Category updatedCat = categoryService.updateCategory(oldName,newName);
 		
 		return new ResponseEntity<Category>(updatedCat, HttpStatus.ACCEPTED);
 	}

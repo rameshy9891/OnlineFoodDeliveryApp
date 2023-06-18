@@ -20,10 +20,14 @@ public class AppConfig {
 	
 		http.authorizeHttpRequests(auth->{
 			auth.requestMatchers(HttpMethod.POST, "/customers").permitAll()
-			.requestMatchers(HttpMethod.POST,"/categories").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.PUT,"/customers/**,/categories").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.DELETE,"/customer/**,/categories/**").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.GET,"/customers/**,/customers,/categories/**,/categories").hasAnyRole("ADMIN","USER")
+			.requestMatchers(HttpMethod.POST,"/categories,/items/**").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.POST,"/addOrder/**").hasAnyRole("USER","ADMIN")
+			.requestMatchers(HttpMethod.PATCH,"/increaseQty/**,/reduceQty/**,/removeItem/**,/clearCart/**,/addItem/**"
+					).hasAnyRole("ADMIN","USER")
+			.requestMatchers(HttpMethod.PUT,"/customers/**,/categories/**,/items,/updateOrder").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.DELETE,"/customer/**,/categories/**,/items/**,/cancelOrder").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.GET,"/customers/**,/customers,/categories/**,/categories,/item/**,/items/**,/itemslist/**,/order/**,/ordersByRestaurant,"
+					+ "/ordersByCustomer").hasAnyRole("ADMIN","USER")
 			//.requestMatchers(HttpMethod.PATCH,"/order/**").hasRole("ADMIN")
 			//.requestMatchers(HttpMethod.GET,"/customers","/customer/**").hasAnyRole("ADMIN","USER")
 			.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
