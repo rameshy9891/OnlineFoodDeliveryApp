@@ -1,18 +1,18 @@
 # sharp-head-9647
 
-# Online Food Delivery Application
+# Online Food Delivery Application:
 
 This is a README file for an Online Food Delivery Application that aims to create a bridge between restaurants and customers. The application is being developed using the Spring Boot framework for the backend and HTML, CSS, and JavaScript for the frontend.
 
-## Problem Statement
+## Problem Statement:
 
 The main objective of this application is to provide a platform where restaurant owners can create and list their food items along with their prices. Customers can sign up, view nearby restaurants, and place orders. Customers can select a payment method and make payments for their orders. Restaurant owners can accept orders and deliver them to customers.
 
-## ER Daigram:
+## Project Schema:
 ![Online Food Delivery Application ReadMe](https://github.com/rameshy9891/sharp-head-9647/assets/119414002/e7dc2a80-bfc4-4049-a51a-f36850f33b63)
 
 
-## Entities
+## Entities:
 
 The application consists of the following entities:
 
@@ -32,7 +32,7 @@ The application consists of the following entities:
 
 8. Login: Represents the authentication and authorization functionality for both restaurant owners and customers.
 
-## Services
+## Services:
 
 The application provides several services to handle different functionalities. Here is an overview of the main services:
 
@@ -52,11 +52,11 @@ The application provides several services to handle different functionalities. H
 
 8. Cart Services: Handles operations related to the food cart, such as adding items, increasing or reducing item quantity, removing items, and clearing the cart.
 
-## Repository
+## Repository:
 
 The repository for this Online Food Delivery Application can be found on GitHub. You can access the repository using the following link: [GitHub Repository](https://github.com/rameshy9891/sharp-head-9647)
 
-## Getting Started
+## Getting Started:
 
 To set up and run the application locally, follow these steps:
 
@@ -70,7 +70,7 @@ To set up and run the application locally, follow these steps:
 
 5. Access the application in a web browser by entering the appropriate URL.
 
-## Tech Stacks
+## Tech Stacks:
 
 The Online Food Delivery Application utilizes the following technologies:
 
@@ -79,6 +79,6 @@ The Online Food Delivery Application utilizes the following technologies:
 - Database: MySQL
 - Additional Libraries: Spring Security, Hibernate, Maven
 
-## Contributors
+## Contributors:
 
 This project is being developed and maintained by Ramesh Yadav(TL), Salman Khan, Rohit, Nitish Mandal 
