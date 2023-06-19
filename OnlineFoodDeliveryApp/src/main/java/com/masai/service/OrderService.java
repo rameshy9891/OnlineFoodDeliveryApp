@@ -12,9 +12,9 @@ public interface OrderService {
 	
 	public OrderDetails updateOrder(OrderDetails order);
 	
-	public OrderDetails removeOrder(OrderDetails order);
+	public OrderDetails removeOrder(Integer orderId);
 	
-	public OrderDetails viewOrder(Integer orderId);
+	public  List<OrderDetails> viewOrder(String email);
 	
 	public List<OrderDetails> viewAllOrdersByRestaurant(Restaurant res);
 	

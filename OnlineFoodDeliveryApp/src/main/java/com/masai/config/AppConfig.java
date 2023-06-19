@@ -47,7 +47,7 @@ public class AppConfig {
 			.requestMatchers(HttpMethod.PATCH,"/increaseQty/**,/reduceQty/**,/removeItem/**,/clearCart/**,/addItem/**"
 					).hasAnyRole("ADMIN","USER")
 			.requestMatchers(HttpMethod.PUT,"/customers/**,/categories/**,/items,/Restaurant/**,/bills/**").hasRole("ADMIN")
-			.requestMatchers(HttpMethod.DELETE,"/customer/**,/categories/**,/items/**,/cancelOrder,/Restaurant/**,/bill/**").hasRole("ADMIN")
+			.requestMatchers(HttpMethod.DELETE,"/customer/**,/categories/**,/items/**,/cancelOrder/**,/Restaurant/**,/bill/**").hasRole("ADMIN")
 			.requestMatchers(HttpMethod.GET,"/customers/**,/customers,/categories/**,/categories,/item/**,/items/**,/itemslist/**,/order/**,/ordersByRestaurant,"
 					+ "/ordersByCustomer,/Restaurant/**,/Restaurant/**,/bill/**,/startDate,/customerId").hasAnyRole("ADMIN","USER")
 			//.requestMatchers(HttpMethod.PATCH,"/order/**").hasRole("ADMIN")

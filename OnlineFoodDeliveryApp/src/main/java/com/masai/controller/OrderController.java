@@ -43,35 +43,35 @@ public class OrderController {
 		return new ResponseEntity<OrderDetails>(updatedOrder,HttpStatus.CREATED);
 	}
 	
-	@DeleteMapping("/cancelOrder")
-	public ResponseEntity<OrderDetails> deleteOrderHandler(@Valid @RequestBody OrderDetails order){
+	@DeleteMapping("/cancelOrder/{orderId}")
+	public ResponseEntity<OrderDetails> deleteOrderHandler(@PathVariable("orderId") Integer orderId){
 		
-		OrderDetails deletedOrder = iOrderService.removeOrder(order);
+		OrderDetails deletedOrder = iOrderService.removeOrder(orderId);
 		
 		return new ResponseEntity<OrderDetails>(deletedOrder,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/order/{orderId}")
-	public ResponseEntity<OrderDetails> viewOrderHandler(@PathVariable("orderId") Integer orderid){
+	@GetMapping("/order/{email}")
+	public ResponseEntity<List<OrderDetails>> viewOrderHandler(@PathVariable("email") String email){
 		
-		OrderDetails fetchedOrder = iOrderService.viewOrder(orderid);
+		List<OrderDetails> fetchedOrder = iOrderService.viewOrder(email);
 		
-		return new ResponseEntity<OrderDetails>(fetchedOrder,HttpStatus.CREATED);
+		return new ResponseEntity<>(fetchedOrder,HttpStatus.OK);
 	}
 	
-	@GetMapping("/ordersByRestaurant")
+	//@GetMapping("/ordersByRestaurant")
 	public ResponseEntity<List<OrderDetails>> viewAllOrderByRestaurantHandler(@Valid @RequestBody Restaurant res){
 		
 		List<OrderDetails> fetchedOrders = iOrderService.viewAllOrdersByRestaurant(res);
 		
-		return new ResponseEntity<List<OrderDetails>>(fetchedOrders,HttpStatus.CREATED);
+		return new ResponseEntity<List<OrderDetails>>(fetchedOrders,HttpStatus.OK);
 	}
 	
-	@GetMapping("/ordersByCustomer")
+	//@GetMapping("/ordersByCustomer")
 	public ResponseEntity<List<OrderDetails>> viewAllOrderByCustomerHandler(@Valid @RequestBody Customer customer){
 		
 		List<OrderDetails> fetchedOrders = iOrderService.viewAllOrdersByCustomer(customer);
 		
-		return new ResponseEntity<List<OrderDetails>>(fetchedOrders,HttpStatus.CREATED);
+		return new ResponseEntity<List<OrderDetails>>(fetchedOrders,HttpStatus.OK);
 	}
 }
