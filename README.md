@@ -81,4 +81,9 @@ The Online Food Delivery Application utilizes the following technologies:
 
 ## Contributors:
 
-This project is being developed and maintained by Ramesh Yadav(TL), Salman Khan, Rohit, Nitish Mandal 
+This project is being developed and maintained by 
+- Ramesh Yadav(TL) 
+- Salman Khan
+- Rohit
+- Nitish Mandal
+- Rushikesh
