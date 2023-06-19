@@ -8,6 +8,9 @@ This is a README file for an Online Food Delivery Application that aims to creat
 
 The main objective of this application is to provide a platform where restaurant owners can create and list their food items along with their prices. Customers can sign up, view nearby restaurants, and place orders. Customers can select a payment method and make payments for their orders. Restaurant owners can accept orders and deliver them to customers.
 
+## ER Daigram:
+
+
 ## Entities
 
 The application consists of the following entities:
