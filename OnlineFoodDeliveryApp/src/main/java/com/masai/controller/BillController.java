@@ -35,7 +35,7 @@ public class BillController {
 	}
 	
 	
-	@PutMapping("/billId/{totalItem}/{totalCost}")
+	@PutMapping("/bills/{totalItem}/{totalCost}")
 	public ResponseEntity<Bill> updateBillHandler(@RequestBody @Valid Bill billId,Integer totalItem,double totalCost){
 		
 	Bill updatedbill=	billservice.updateBill(totalItem, totalItem, totalCost);
@@ -62,7 +62,7 @@ public class BillController {
 	}
 	
 	
-	@GetMapping("/startDate/{endDate}")
+	@GetMapping("/startDate")
 	public ResponseEntity<List<Bill>> viewBillDateRange(@RequestParam("startDate") LocalDate startDate,@RequestParam("endDate") LocalDate endDate){
 		
 		List<Bill>  allbill= billservice.viewBillByDateRange(startDate, endDate);
