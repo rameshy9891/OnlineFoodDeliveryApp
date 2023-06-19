@@ -67,9 +67,9 @@
   
     <label for="gender">Gender:</label>
     <select id="gender" name="gender" required>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
+      <option value="MALE">Male</option>
+      <option value="FEMALE">Female</option>
+      <option value="OTHERS">Other</option>
     </select>
   
     <label for="email">Email:</label>
@@ -167,7 +167,8 @@
       .then(response => response.json())
       .then(result => {
         // Handle the API response here
-        showmydata(result);
+        console.log(result)
+        alert(`${result.firstName} is added`);
       })
       .catch(error => {
         // Handle any error during the API call

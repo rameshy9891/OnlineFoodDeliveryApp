@@ -73,28 +73,32 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDetails removeOrder(OrderDetails order) {
+	public OrderDetails removeOrder(Integer orderId) {
 		
-		FoodCart cart = order.getCart();
-        
-		cart.getOrderList().remove(order); // Remove order from the food cart
-        
-		order.setCart(null); // Set the food cart as null in the order
-        
-        foodCartRepository.save(cart); // Update the food cart
-        
+		  
+		
+	    OrderDetails order= orderRepository.findById(orderId).orElseThrow(()-> new OrderException("Invalid order id"));
+         
         orderRepository.delete(order);
         
         return order;
 	}
 
 	@Override
-	public OrderDetails viewOrder(Integer orderId) {
-		
-		OrderDetails order = orderRepository.findById(orderId)
-				.orElseThrow( ()-> new OrderException("Invalid Order Id"));
-		
-		return order;
+	public List<OrderDetails> viewOrder(String email) {
+		 if(email==null) throw new CustomerException("Please provide Valid data");
+			
+			Customer customer =customerRepository.findByEmail(email).orElseThrow(()-> new CustomerException("Not able to find Customer in database"));
+			
+			FoodCart cart =customer.getFoodCart();
+		    
+			List<OrderDetails> orders =cart.getOrderList();	
+		    
+			if(orders.isEmpty()) {
+				throw new OrderException("No order present related to this constomer");
+			}
+			
+		return orders;
 	}
 
 	@Override
