@@ -35,7 +35,7 @@ public class OrderController {
 		return new ResponseEntity<OrderDetails>(placedOrder,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/updateOrder")
+	//@PutMapping("/updateOrder")
 	public ResponseEntity<OrderDetails> updateOrderHandler(@Valid @RequestBody OrderDetails order){
 		
 		OrderDetails updatedOrder = iOrderService.updateOrder(order);
