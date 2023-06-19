@@ -70,7 +70,7 @@ To set up and run the application locally, follow these steps:
 
 5. Access the application in a web browser by entering the appropriate URL.
 
-## Technologies Used
+## Tech Stacks
 
 The Online Food Delivery Application utilizes the following technologies:
 
@@ -81,4 +81,4 @@ The Online Food Delivery Application utilizes the following technologies:
 
 ## Contributors
 
-This project is being developed and maintained by
+This project is being developed and maintained by Ramesh Yadav(TL), Salman Khan, Rohit, Nitish Mandal 
