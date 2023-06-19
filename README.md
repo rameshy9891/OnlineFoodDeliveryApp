@@ -1,4 +1,3 @@
-# sharp-head-9647
 
 # Online Food Delivery Application:
 
